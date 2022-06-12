@@ -1,4 +1,5 @@
 ﻿using Kolokwium.Models;
+using Kolokwium.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,27 +17,32 @@ namespace Kolokwium.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Album>> GetAlbums(int idAlbum)
+        public async Task<IEnumerable<SomeSortOfAlbum>> GetAlbums(int idAlbum)
         {
             var albums = await _dbContext.Albums
                 .Include(x => x.Tracks)
                 .Where(x => x.IdAlbum == idAlbum)
-                .Select(x => new Album
+                .Select(x => new SomeSortOfAlbum
                 {
                     IdAlbum = x.IdAlbum,
                     AlbumName = x.AlbumName,
                     PublishDate = x.PublishDate,
                     IdMusicLabel = x.IdMusicLabel,
-                    Tracks = x.Tracks.Select(x => new Track
+                    SomeSortOfTrack = x.Tracks.Select(x => new SomeSortOfTrack
                     {
                         IdTrack = x.IdTrack,
-                        Album = x.Album,
                         Duration = x.Duration,
                         IdMusicAlbum = x.IdMusicAlbum,
                         TrackName = x.TrackName
                     }).OrderByDescending(x => x.Duration).ToList()
                 }).ToListAsync();
             return albums; 
+        }
+
+        public async Task<int> GetLastIdAlbum()
+        {
+            var lastAlbum = await _dbContext.Albums.LastOrDefaultAsync();
+            return lastAlbum.IdAlbum;
         }
     }
 }

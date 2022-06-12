@@ -22,8 +22,9 @@ namespace Kolokwium.Controllers
         [Route("{idAlbum}")]
         public async Task<IActionResult> GetAlbums(int idAlbum)
         {
+            if (idAlbum > await _dbService.GetLastIdAlbum())
+                return NotFound($"Nie znaleziono albumu o id {idAlbum}");
             return Ok(await _dbService.GetAlbums(idAlbum));
         }
-
     }
 }

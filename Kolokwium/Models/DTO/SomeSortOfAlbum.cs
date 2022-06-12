@@ -11,6 +11,6 @@ namespace Kolokwium.Models.DTO
         public string AlbumName { get; set; }
         public DateTime PublishDate { get; set; }
         public int IdMusicLabel { get; set; }
-        public virtual ICollection<Track> Tracks { get; set; }
+        public virtual ICollection<SomeSortOfTrack> SomeSortOfTrack { get; set; }
     }
 }

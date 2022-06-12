@@ -35,6 +35,7 @@ namespace Kolokwium.Controllers
         {
             await _dbService.DeleteMusician(idMusician);
             return Ok("Usunięto muzyka");
+
         }
     }
 }

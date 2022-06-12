@@ -9,5 +9,7 @@ namespace Kolokwium.Services
     {
         Task<IEnumerable<SomeSortOfAlbum>> GetAlbums(int idAlbum);
         Task<int> GetLastIdAlbum();
+        Task<bool> RemoveMusician(int id);
+        Task DeleteMusician(int id);
     }
 }

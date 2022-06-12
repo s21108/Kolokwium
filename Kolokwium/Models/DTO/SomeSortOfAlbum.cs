@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kolokwium.Models
+namespace Kolokwium.Models.DTO
 {
-    public class Album
+    public class SomeSortOfAlbum
     {
         public int IdAlbum { get; set; }
         public string AlbumName { get; set; }
         public DateTime PublishDate { get; set; }
         public int IdMusicLabel { get; set; }
         public virtual ICollection<Track> Tracks { get; set; }
-        public virtual MusicLabel MusicLabel { get; set; }
     }
 }
